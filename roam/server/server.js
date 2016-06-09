@@ -22,10 +22,7 @@ const cancelRoamHandler = require('./utils/cancelRoamHandler');
 const joinRoamHandler = require('./utils/joinRoamHandler');
 const roamListHandler = require('./utils/roamListHandler');
 
-
-
 var saltRounds = 10;
-
 
 //config for email SMTP for gmail. We are send email notifications to users
 var smtpConfig = {
