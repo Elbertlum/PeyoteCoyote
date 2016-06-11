@@ -15,7 +15,7 @@ import dateFormat from './Helpers/dateFormat'
 var requestString = ''
 let roams = [];
 
-fetch('http://localhost:3000/roamList?email=testfsdf1@test.com&latitude=37.785834&longitude=-122.406417')
+fetch('http://107.170.251.113:3000/roamList?email=testfsdf1@test.com&latitude=37.785834&longitude=-122.406417')
 .then( res => res = res.json() )
 .then( res => {
   console.log('RES',res)
