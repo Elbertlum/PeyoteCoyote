@@ -13,10 +13,11 @@ import SwipeCards from './Helpers/Cards/SwipeCards';
 
 let roams = [];
 
-fetch('http://localhost:3000/roamList?email=testfsdf1@test.com&latitude=37.785834&longitude=-122.406417')
-.then( res => res = res.json() )
-.then( res => {
-  console.log('RES',res)
+
+// fetch('http://localhost:3000/roamList?email=testfsdf1@test.com&latitude=37.785834&longitude=-122.406417')
+// .then( res => res = res.json() )
+// .then( res => {
+//   console.log('RES',res)
   // res.forEach(function(roam) {
   //   roam = roam.row[0];
   //   const dummyAttending = Math.floor(Math.random() * roam.capacity);
@@ -42,8 +43,8 @@ fetch('http://localhost:3000/roamList?email=testfsdf1@test.com&latitude=37.78583
   // }); 
   
   // console.log('ROAMS!!!!!!!!!!!!!!!!!!!!!!!!!:', JSON.stringify(roams));
-})
-.catch( err => console.log('ERRRORRRRR posting object', err));
+//})
+//.catch( err => console.log('ERRRORRRRR posting object', err));
 
 class Card extends Component{
   
@@ -54,13 +55,14 @@ class Card extends Component{
       
     }
   }
+  
 
   render() {
     return (
       <View style={styles.card}>
         
         <View style={styles.cardTitleWrap}>
-          <Text style={styles.cardHeader}>{this.props.name}</Text>
+          <Text style={styles.cardHeader}>{this.props.row[0].firstName}</Text>
         </View>
         
         <View style={styles.cardTimeWrap}>
@@ -68,14 +70,14 @@ class Card extends Component{
         </View>
         
         <View style={styles.userImageWrap}>
-          <Image style={styles.userImage} source={require('../../imgs/alba.jpg')}/>
+          <Image style={styles.userImage} source={this.props.row[0].picture}/>
         </View>
 
         
        
 
         <View style={styles.cardDescriptionWrap}>
-          <Text style={styles.cardDescription}>{this.props.description}</Text>
+          <Text style={styles.cardDescription}>{this.props.row[0].email}</Text>
         </View>
       </View>
     )
@@ -132,6 +134,29 @@ class JoinPool extends Component {
       roams: roams,
       outOfCards: false
     }
+  }
+
+  componentDidMount() {
+    fetch('http://107.170.251.113:3000/roamX?email=' 
+         + this.props.userEmail 
+         + '&&id='
+         + this.props.id, {
+         method: 'GET',
+         headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json',
+           'Authorization': this.props.token
+         }
+       })
+       .then((response) => {
+         response.json().then(result => {
+           console.log('this is the data from the db: ', result);
+           roams = result;
+         })
+       })
+       .catch((error) => {
+         console.log('Error handling submit:', error);
+       });
   }
 
   handleYup (card) {

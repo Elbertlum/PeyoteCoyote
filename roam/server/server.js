@@ -27,7 +27,7 @@ const cancelRoamHandler = require('./utils/cancelRoamHandler');
 // const joinRoamHandler = require('./utils/joinRoamHandler');
 const roamListHandler = require('./utils/roamListHandler');
 // const profileHandler = require('./utils/profileHandler');
-const usersHandler = require('./utils/roamXHandler');
+const roamXHandler = require('./utils/roamXHandler');
 
 
 
